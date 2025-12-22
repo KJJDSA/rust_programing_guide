@@ -1,0 +1,6 @@
+[workspace]
+
+members = [
+    "projects/hello_cargo",
+    "projects/guessing_game", # 앞으로 만들 프로젝트도 미리 추가해두면 편해요!
+]
