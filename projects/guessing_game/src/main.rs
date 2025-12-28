@@ -10,7 +10,6 @@ fn main() {
     println!("The secret number is: {secret_number}");
 
     loop {
-        // loop : 무한루프를 발생시킨다.
         println!("Please input your guess.");
 
         let mut guess = String::new();
@@ -19,13 +18,19 @@ fn main() {
             .read_line(&mut guess)
             .expect("Failed to read line");
 
-        let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        // parse 의 Result 결과물을 바꿀 때, expect로 무조건 프로그램을 끝내는 것이 아니라 계속 진행할 수 있도록 에러처리 하기
+        // let guess: u32 = guess.trim().parse().expect("Please type a number!");
+        let guess: u32 = match guess.trim().parse() {
+            // match 는 parse의 Result 를 받을 것이므로, Result의 구성인 두 열거형을 추가하면 분기할 수 있다.
+            Ok(number) => number,
+            Err(_) => continue, // _ === 포괄값(catch-all). Err에 담긴 어떤 값이든 매칭 할 수 있게된다. 
+        };
 
         println!("You guessed: {guess}");
 
         match guess.cmp(&secret_number) {
             Ordering::Less => println!("Too small!"),
-            Ordering::Greater => println!("Too bug!"),
+            Ordering::Greater => println!("Too big!"),
             Ordering::Equal => {
                 println!("You win!");
                 break;
