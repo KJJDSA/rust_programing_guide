@@ -7,4 +7,4 @@ members = [
     "projects/hello_cargo",
     "projects/guessing_game"
         # 프로젝트를 만들 때마다 추가해줘야함
-]
+, "projects/variables"]
